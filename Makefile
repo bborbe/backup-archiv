@@ -1,0 +1,38 @@
+all: test install run
+install:
+	GOBIN=$(GOPATH)/bin GO15VENDOREXPERIMENT=1 go install bin/backup_archiv_cron/*.go
+test:
+	GO15VENDOREXPERIMENT=1 go test -cover `glide novendor`
+vet:
+	go tool vet .
+	go tool vet --shadow .
+lint:
+	golint -min_confidence 1 ./...
+errcheck:
+	errcheck -ignore '(Close|Write)' ./...
+check: lint vet errcheck
+run:
+	backup_archiv_cron \
+	-logtostderr \
+	-v=1 \
+	-sourcedir=/opt/apache-maven-3.3.9 \
+	-targetdir=/tmp \
+	-lock=/tmp/backup_archiv_cron.lock \
+	-name=etc-backup \
+	-one-time
+open:
+	open http://localhost:8080/
+format:
+	find . -name "*.go" -exec gofmt -w "{}" \;
+	goimports -w=true .
+prepare:
+	npm install
+	go get -u golang.org/x/tools/cmd/goimports
+	go get -u github.com/Masterminds/glide
+	go get -u github.com/golang/lint/golint
+	go get -u github.com/kisielk/errcheck
+	glide install
+update:
+	glide up
+clean:
+	rm -rf vendor
