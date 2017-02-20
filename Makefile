@@ -14,11 +14,11 @@ check: lint vet errcheck
 run:
 	backup_archiv_cron \
 	-logtostderr \
-	-v=1 \
+	-v=0 \
 	-sourcedir=/opt/apache-maven-3.3.9 \
 	-targetdir=/tmp \
 	-lock=/tmp/backup_archiv_cron.lock \
-	-name=etc-backup \
+	-name=mybbackup \
 	-one-time
 open:
 	open http://localhost:8080/

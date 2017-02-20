@@ -49,21 +49,9 @@ func runBackup(backupfile model.BackupFilename, sourceDirectory model.SourceDire
 
 	glog.V(4).Infof("backup directory %s", sourceDirectory)
 
-	info, err := os.Stat(sourceDirectory.String())
-	if err != nil {
-		glog.Warningf("get stat for dir %s failed: %v", sourceDirectory.String(), err)
-		return nil
-	}
-
-	var baseDir string
-	if info.IsDir() {
-		baseDir = filepath.Base(sourceDirectory.String())
-	}
-
 	return filepath.Walk(sourceDirectory.String(),
 		func(path string, info os.FileInfo, err error) error {
 			glog.V(2).Infof("backup %s", path)
-
 			if err != nil {
 				return err
 			}
@@ -71,19 +59,14 @@ func runBackup(backupfile model.BackupFilename, sourceDirectory model.SourceDire
 			if err != nil {
 				return err
 			}
-
-			if baseDir != "" {
-				header.Name = filepath.Join(baseDir, strings.TrimPrefix(path, sourceDirectory.String()))
-			}
-
+			header.Name = strings.TrimPrefix(strings.TrimPrefix(path, sourceDirectory.String()), "/")
+			glog.V(2).Infof("backup %s => %s", path, header.Name)
 			if err := tw.WriteHeader(header); err != nil {
 				return err
 			}
-
 			if info.IsDir() {
 				return nil
 			}
-
 			file, err := os.Open(path)
 			if err != nil {
 				return err
