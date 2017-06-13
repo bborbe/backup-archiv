@@ -1,14 +1,16 @@
 hash: 834dcda6fd1d1e490e182ed33c21d12b4fba6ba818cdf3645a3665d1b4febda7
-updated: 2017-06-13T12:53:55.413309859+02:00
+updated: 2017-06-13T13:52:39.674905712+02:00
 imports:
 - name: github.com/bborbe/cron
-  version: 807a2c6a298ae10a1c35f7f26815284599c6a622
+  version: 20d491ed207180aacf635b2006c0c293fd2ab9e1
 - name: github.com/bborbe/flagenv
   version: 4bf10dbe62f41ce40353a70225a84decfd16d3ac
 - name: github.com/bborbe/lock
   version: ac57be166a1c39f4555dc7f865b35b84d7807549
 - name: github.com/golang/glog
   version: 23def4e6c14b4da8ac2ed8007337bc5eb5007998
+- name: github.com/robfig/cron
+  version: 736158dc09e10f1911ca3a1e1b01f11b566ce5db
 testImports:
 - name: github.com/bborbe/assert
   version: 2448f69a8cb98ee9e5744f678477959100ceb9d4
