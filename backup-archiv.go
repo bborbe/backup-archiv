@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/bborbe/backup-archiv-cron/archiv"
-	"github.com/bborbe/backup-archiv-cron/model"
+	"github.com/bborbe/backup-archiv/archiv"
+	"github.com/bborbe/backup-archiv/model"
 	"github.com/bborbe/cron"
 	flag "github.com/bborbe/flagenv"
 	"github.com/bborbe/lock"
@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	defaultLockName    = "/var/run/backup-archiv-cron.lock"
+	defaultLockName    = "/var/run/backup-archiv.lock"
 	parameterWait      = "wait"
 	parameterOneTime   = "one-time"
 	parameterLock      = "lock"

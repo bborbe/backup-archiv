@@ -3,7 +3,7 @@
 ## Install
 
 ```
-go get github.com/bborbe/backup-archiv-cron
+go get github.com/bborbe/backup-archiv
 ```
 
 ## Run Backup
@@ -11,10 +11,10 @@ go get github.com/bborbe/backup-archiv-cron
 One time
 
 ```
-backup-archiv-cron \
+backup-archiv \
 -logtostderr \
 -v=2 \
--lock=/tmp/backup-archiv-cron.lock \
+-lock=/tmp/backup-archiv.lock \
 -source=/opt/go1.7.4 \
 -target=/tmp \
 -one-time
@@ -23,10 +23,10 @@ backup-archiv-cron \
 Cron
 
 ```
-backup-archiv-cron \
+backup-archiv \
 -logtostderr \
 -v=2 \
--lock=/tmp/backup-archiv-cron.lock \
+-lock=/tmp/backup-archiv.lock \
 -source=/opt/go1.7.4 \
 -target=/tmp \
 -wait=1h

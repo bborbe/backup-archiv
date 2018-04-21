@@ -3,7 +3,7 @@ MAINTAINER Benjamin Borbe <bborbe@rocketnews.de>
 
 ENV LOCK /backup_cleanup_cron.run
 
-COPY backup-archiv-cron /
+COPY backup-archiv /
 COPY files/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 
-ENTRYPOINT ["/backup-archiv-cron"]
+ENTRYPOINT ["/backup-archiv"]

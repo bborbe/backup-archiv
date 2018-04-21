@@ -3,7 +3,7 @@ package archiv
 import (
 	"archive/tar"
 	"compress/gzip"
-	"github.com/bborbe/backup-archiv-cron/model"
+	"github.com/bborbe/backup-archiv/model"
 	"github.com/golang/glog"
 	"io"
 	"os"
