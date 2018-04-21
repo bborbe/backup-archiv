@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	defaultLockName    = "/var/run/backup_archiv_cron.lock"
+	defaultLockName    = "/var/run/backup-archiv-cron.lock"
 	parameterWait      = "wait"
 	parameterOneTime   = "one-time"
 	parameterLock      = "lock"

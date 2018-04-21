@@ -1,5 +1,5 @@
 REGISTRY ?= docker.io
-IMAGE ?= bborbe/backup-cleanup-cron
+IMAGE ?= bborbe/backup-archiv-cron
 ifeq ($(VERSION),)
 	VERSION := $(shell git fetch --tags; git describe --tags `git rev-list --tags --max-count=1`)
 endif
@@ -49,7 +49,7 @@ clean:
 	docker rmi $(REGISTRY)/$(IMAGE):$(VERSION)
 
 buildgo:
-	CGO_ENABLED=0 GOOS=linux go build -ldflags "-s" -a -installsuffix cgo -o backup-archiv-cron ./go/src/github.com/$(IMAGE)/bin/backup-archiv-cron
+	CGO_ENABLED=0 GOOS=linux go build -ldflags "-s" -a -installsuffix cgo -o backup-archiv-cron ./go/src/github.com/$(IMAGE)
 
 build:
 	docker build --build-arg VERSION=$(VERSION) --no-cache --rm=true -t $(REGISTRY)/$(IMAGE)-build:$(VERSION) -f ./Dockerfile.build .
