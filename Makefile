@@ -1,38 +1,17 @@
+
 all: test install run
+
 install:
-	GOBIN=$(GOPATH)/bin GO15VENDOREXPERIMENT=1 go install bin/backup_archiv_cron/*.go
+	GOBIN=$(GOPATH)/bin GO15VENDOREXPERIMENT=1 go install *.go
+
 test:
-	GO15VENDOREXPERIMENT=1 go test -cover `glide novendor`
-vet:
-	go tool vet .
-	go tool vet --shadow .
-lint:
-	golint -min_confidence 1 ./...
-errcheck:
-	errcheck -ignore '(Close|Write)' ./...
-check: lint vet errcheck
-run:
-	backup_archiv_cron \
-	-logtostderr \
-	-v=0 \
-	-sourcedir=/opt/apache-maven-3.3.9 \
-	-targetdir=/tmp \
-	-lock=/tmp/backup_archiv_cron.lock \
-	-name=mybbackup \
-	-one-time
-open:
-	open http://localhost:8080/
+	go test -cover -race $(shell go list ./... | grep -v /vendor/)
+
 format:
-	find . -name "*.go" -exec gofmt -w "{}" \;
-	goimports -w=true .
+	go get golang.org/x/tools/cmd/goimports
+	find . -type f -name '*.go' -not -path './vendor/*' -exec gofmt -w "{}" +
+	find . -type f -name '*.go' -not -path './vendor/*' -exec goimports -w "{}" +
+
 prepare:
-	npm install
 	go get -u golang.org/x/tools/cmd/goimports
-	go get -u github.com/Masterminds/glide
-	go get -u github.com/golang/lint/golint
-	go get -u github.com/kisielk/errcheck
-	glide install
-update:
-	glide up
-clean:
-	rm -rf vendor
+	go get -u github.com/golang/dep/cmd/dep

@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/bborbe/backup_archiv_cron/archiv"
-	"github.com/bborbe/backup_archiv_cron/model"
+	"github.com/bborbe/backup-archiv-cron/archiv"
+	"github.com/bborbe/backup-archiv-cron/model"
 	"github.com/bborbe/cron"
 	flag "github.com/bborbe/flagenv"
 	"github.com/bborbe/lock"
